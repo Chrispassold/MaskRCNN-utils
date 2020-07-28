@@ -58,7 +58,7 @@ os.makedirs(output_masks_dir)
 
 for item in labelbox_json:
     labels = item['Label']
-    if labels == 'Skip':
+    if len(labels) == 0:
         continue
 
     image_name = item['External ID']
@@ -79,7 +79,7 @@ for item in labelbox_json:
             mask = np.zeros((height, width), dtype=np.uint8)
             all_points_x = []
             all_points_y = []
-            geometry = label_polygon['geometry']
+            geometry = label_polygon['polygon']
             for coords in geometry:
                 all_points_x.append(coords['x'])
                 all_points_y.append(coords['y'])
